@@ -24,5 +24,11 @@ let newApp = Vue.createApp({
         }
     }
 });
-
+// computed: {
+//     BusinessCount() {
+//       return Object.keys(this.Businesslist).length;
+//     },
+//     UserCount() {
+//       return Object.keys(this.Userslist).length;
+//     },
 newApp.mount("#app");

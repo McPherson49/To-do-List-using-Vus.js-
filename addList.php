@@ -19,10 +19,10 @@ session_start();
                 <div class="card">
                     <div class="card-header text-center">
                         <h2>TO DO INFORMATION</h2>
-                        <a href="index.php" class="btn btn-danger float-end">Back</a>
+                        <a href="index.php" class="btn btn-danger float-end" >Back</a>
                     </div>
                     <div class="card-body">
-                        <form action="addListlogic.php" method="post">
+                        <form action="addListlogic.php" method="post" v-if="!show">
                             <div class="mb-3">
                                 <label for=""> Name</label>
                                 <input type="text" v-model ="name" class="form-control" name="name" required>

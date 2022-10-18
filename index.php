@@ -20,7 +20,7 @@ include("connect.php");
                 <div class="card">
                     <div class="card-header text-center">
                         <h1>TO DO LIST</h1>
-                        <a href="addlist.php" class="btn btn-info float-end">Add list</a>
+                        <a href="addlist.php" class="btn btn-info float-end" v-if="show" >Add list</a>
                     </div>
                     <div class="card-body">
                         <table class="table table-bordered table-striped">
@@ -32,11 +32,37 @@ include("connect.php");
                                 </tr>
                             </thead>
                             <tbody>
-                            <tr>
-                                <td>ID</td>
+                            <!-- <tr>
+                                <td v-if="!show" >ID</td>
                                 <td> Name</td>
                                 <td>Time</td>
-                                </tr>
+                            </tr> -->
+                            <?php 
+                            
+                            $query = "SELECT * FROM users ";
+                            $query_run = mysqli_query($conn, $query);
+                            if (mysqli_num_rows($query_run) > 0) {
+                                foreach ($query_run as $todo) {
+                                    ?>
+                                    <tr>
+                                        <td><?= $todo["id"];?></td>
+                                        <td><?= $todo["name"];?></td>
+                                        <td><?= $todo["time"];?></td>
+
+                                        <td>
+                                            <a href="todo_view.php?id=<?=$todo['id'];?>" class="btn btn-info btn-sm">View</a>
+                                            <a href="updatelist.php?id=<?=$todo['id'];?>" class="btn btn-success btn-sm">Edit</a>
+                                            <form action="deletelistlogic.php" method="POST" class="d-inline">
+                                                <button type="submit" name="delete_todo" value="<?=$todo['id'];?>" class="btn btn-danger btn-sm">Delete</button>
+                                            </form>
+                                        </td>
+                                    </tr>
+                                    <?php
+                                }
+                            }else {
+                                echo "<h5>NO RECORD FOUND</h5>";
+                            }
+                            ?>
                              </tbody>
                         </table>
                     </div>
@@ -52,3 +78,29 @@ include("connect.php");
   </body>
 </html>
 
+   <?php 
+                            
+                            $query = "SELECT * FROM users ";
+                            $query_run = mysqli_query($conn, $query);
+                            if (mysqli_num_rows($query_run) > 0) {
+                                foreach ($query_run as $todo) {
+                                    ?>
+                                    <tr>
+                                        <td><?= $todo["id"];?></td>
+                                        <td><?= $todo["name"];?></td>
+                                        <td><?= $todo["time"];?></td>
+
+                                        <td>
+                                            <a href="todo_view.php?id=<?=$todo['id'];?>" class="btn btn-info btn-sm">View</a>
+                                            <a href="updatelist.php?id=<?=$todo['id'];?>" class="btn btn-success btn-sm">Edit</a>
+                                            <form action="deletelistlogic.php" method="POST" class="d-inline">
+                                                <button type="submit" name="delete_todo" value="<?=$todo['id'];?>" class="btn btn-danger btn-sm">Delete</button>
+                                            </form>
+                                        </td>
+                                    </tr>
+                                    <?php
+                                }
+                            }else {
+                                echo "<h5>NO RECORD FOUND</h5>";
+                            }
+                            ?>  
